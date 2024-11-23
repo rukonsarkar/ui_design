@@ -256,504 +256,513 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: AspectRatio(
-                          aspectRatio: 1 / 1,
-                          child: Card(
-                            elevation: 3,
-                            shape: RoundedRectangleBorder(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: AspectRatio(
+                        aspectRatio: 1 / 1,
+                        child: Card(
+                          elevation: 3,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: SizedBox(
+                            width: 40,
+                            height: 40,
+                            child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
+                              child: SizedBox(
+                                child: Image.asset(
+                                  "assets/images/rukon.jpg",
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
                             ),
-                            child: SizedBox(
-                              width: 40,
-                              height: 40,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: SizedBox(
-                                  child: Image.asset(
-                                    "assets/images/rukon.jpg",
-                                    fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const Expanded(
+                      flex: 5,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Hey, Rukon",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text("Today's fresh vegetables"),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.notifications_none,
+                          color: Colors.black,
+                        ),
+                        iconSize: 30,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 8,
+                    child: Card(
+                      color: Colors.white,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side: BorderSide(
+                            color: Colors.grey.shade200,
+                          )),
+                      child: const TextField(
+                        decoration: InputDecoration(
+                          icon: Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: Icon(
+                              Icons.search,
+                            ),
+                          ),
+                          iconColor: Colors.grey,
+                          prefixStyle: TextStyle(color: Colors.black),
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400),
+                          hintText: 'Find your favorite food...',
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Card(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(
+                          color: Colors.grey.shade200,
+                        ),
+                      ),
+                      color: Colors.white,
+                      child: const SizedBox(
+                        height: 45,
+                        child: Icon(Icons.filter_alt_outlined),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 10),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Most rated',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'View All',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.deepOrange,
+                                ),
+                              ),
+                              Icon(
+                                Icons.chevron_right,
+                                color: Colors.deepOrange,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        height: 180,
+                        width: double.maxFinite,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: vegetables.length,
+                          itemBuilder: (context, index) {
+                            return SizedBox(
+                              width: 150,
+                              height: 120,
+                              child: Card(
+                                color: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(70),
+                                    topRight: Radius.circular(70),
+                                    bottomLeft: Radius.circular(15),
+                                    bottomRight: Radius.circular(15),
+                                  ),
+                                ),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                        child: Stack(
+                                          children: [
+                                            Image.asset(
+                                              width: 120,
+                                              height: 120,
+                                              vegetables[index]['imagePath']!,
+                                            ),
+                                            Positioned(
+                                              top: 0,
+                                              right: 0,
+                                              child: CircleAvatar(
+                                                radius: 18,
+                                                backgroundColor: Colors.deepOrange,
+                                                child: IconButton(
+                                                  onPressed: () {},
+                                                  icon: const Icon(
+                                                    Icons.favorite,
+                                                    color: Colors.white,
+                                                    size: 18,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.symmetric(horizontal: 8),
+                                        child: Text(
+                                          vegetables[index]['title']!,
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.symmetric(horizontal: 8),
+                                        child: Row(
+                                          children: [
+                                            const Text('Details  '),
+                                            Text(
+                                              vegetables[index]['rating']!,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            const Icon(
+                                              Icons.star,
+                                              color: Colors.deepOrange,
+                                              size: 15,
+                                            ),
+                                            Text(
+                                                '(${vegetables[index]['ratingCount']!})'),
+                                          ],
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Recommended for you',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
                             ),
                           ),
-                        ),
-                      ),
-                      const Expanded(
-                        flex: 5,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          Row(
                             children: [
                               Text(
-                                "Hey, Rukon",
+                                'View All',
                                 style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.deepOrange,
                                 ),
                               ),
-                              Text("Today's fresh vegetables"),
+                              Icon(
+                                Icons.chevron_right,
+                                color: Colors.deepOrange,
+                              )
                             ],
                           ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        height: 180,
+                        width: double.maxFinite,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: vegetableList.length,
+                          itemBuilder: (context, index) {
+                            return SizedBox(
+                              width: 150,
+                              height: 120,
+                              child: Card(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                shadowColor: Colors.deepOrange,
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: Color.fromRGBO(248, 239, 235, 1),
+                                              borderRadius:
+                                              BorderRadius.circular(15)),
+                                          width: 120,
+                                          height: 120,
+                                          child: Stack(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(5),
+                                                child: Image.asset(
+                                                  width: 100,
+                                                  height: 100,
+                                                  vegetableList[index]['imagePath']!,
+                                                ),
+                                              ),
+                                              Positioned(
+                                                top: 0,
+                                                right: 0,
+                                                child: CircleAvatar(
+                                                  radius: 18,
+                                                  backgroundColor:
+                                                  Colors.grey.shade400,
+                                                  child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: const Icon(
+                                                      Icons.favorite,
+                                                      color: Colors.white,
+                                                      size: 18,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.symmetric(horizontal: 8),
+                                        child: Text(
+                                          vegetableList[index]['title']!,
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.symmetric(horizontal: 8),
+                                        child: Row(
+                                          children: [
+                                            const Text('Details  '),
+                                            Text(
+                                              vegetableList[index]['rating']!,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            const Icon(
+                                              Icons.star,
+                                              color: Colors.deepOrange,
+                                              size: 15,
+                                            ),
+                                            Text(
+                                                '(${vegetableList[index]['ratingCount']!})'),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
-                      Expanded(
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.notifications,
-                            color: Colors.black,
+                      const SizedBox(height: 10),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Healthy foods',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
-                          iconSize: 30,
+                          Row(
+                            children: [
+                              Text(
+                                'View All',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.deepOrange,
+                                ),
+                              ),
+                              Icon(
+                                Icons.chevron_right,
+                                color: Colors.deepOrange,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        height: 180,
+                        width: double.maxFinite,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: vegetableList.length,
+                          itemBuilder: (context, index) {
+                            return SizedBox(
+                              width: 150,
+                              height: 120,
+                              child: Card(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                shadowColor: Colors.deepOrange,
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: Color.fromRGBO(247, 249, 236, 1),
+                                              borderRadius:
+                                              BorderRadius.circular(15)),
+                                          width: 120,
+                                          height: 120,
+                                          child: Stack(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(5),
+                                                child: Image.asset(
+                                                  width: 100,
+                                                  height: 100,
+                                                  healthyFoodsList[index]
+                                                  ['imagePath']!,
+                                                ),
+                                              ),
+                                              Positioned(
+                                                top: 0,
+                                                right: 0,
+                                                child: CircleAvatar(
+                                                  radius: 18,
+                                                  backgroundColor: Colors.deepOrange,
+                                                  child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: const Icon(
+                                                      Icons.favorite,
+                                                      color: Colors.white,
+                                                      size: 18,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.symmetric(horizontal: 8),
+                                        child: Text(
+                                          healthyFoodsList[index]['title']!,
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.symmetric(horizontal: 8),
+                                        child: Row(
+                                          children: [
+                                            const Text('Details  '),
+                                            Text(
+                                              healthyFoodsList[index]['rating']!,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            const Icon(
+                                              Icons.star,
+                                              color: Colors.deepOrange,
+                                              size: 15,
+                                            ),
+                                            Text(
+                                                '(${healthyFoodsList[index]['ratingCount']!})'),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 8,
-                      child: Card(
-                        color: Colors.white,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            side: BorderSide(
-                              color: Colors.grey.shade200,
-                            )),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                            icon: Padding(
-                              padding: EdgeInsets.only(left: 10),
-                              child: Icon(
-                                Icons.search,
-                              ),
-                            ),
-                            iconColor: Colors.grey,
-                            prefixStyle: TextStyle(color: Colors.black),
-                            border: InputBorder.none,
-                            hintStyle: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400),
-                            hintText: 'Find your favorite food...',
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Card(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          side: BorderSide(
-                            color: Colors.grey.shade200,
-                          ),
-                        ),
-                        color: Colors.white,
-                        child: const SizedBox(
-                          height: 45,
-                          child: Icon(Icons.filter_alt_outlined),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Most rated',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'View All',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.deepOrange,
-                          ),
-                        ),
-                        Icon(
-                          Icons.chevron_right,
-                          color: Colors.deepOrange,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  height: 180,
-                  width: double.maxFinite,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: vegetables.length,
-                    itemBuilder: (context, index) {
-                      return SizedBox(
-                        width: 150,
-                        height: 120,
-                        child: Card(
-                          color: Colors.white,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(70),
-                              topRight: Radius.circular(70),
-                              bottomLeft: Radius.circular(15),
-                              bottomRight: Radius.circular(15),
-                            ),
-                          ),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Center(
-                                  child: Stack(
-                                    children: [
-                                      Image.asset(
-                                        width: 120,
-                                        height: 120,
-                                        vegetables[index]['imagePath']!,
-                                      ),
-                                      Positioned(
-                                        top: 0,
-                                        right: 0,
-                                        child: CircleAvatar(
-                                          radius: 18,
-                                          backgroundColor: Colors.deepOrange,
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                              Icons.favorite,
-                                              color: Colors.white,
-                                              size: 18,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: Text(
-                                    vegetables[index]['title']!,
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: Row(
-                                    children: [
-                                      const Text('Details  '),
-                                      Text(
-                                        vegetables[index]['rating']!,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      const Icon(
-                                        Icons.star,
-                                        color: Colors.deepOrange,
-                                        size: 15,
-                                      ),
-                                      Text(
-                                          '(${vegetables[index]['ratingCount']!})'),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Recommended for you',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'View All',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.deepOrange,
-                          ),
-                        ),
-                        Icon(
-                          Icons.chevron_right,
-                          color: Colors.deepOrange,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  height: 180,
-                  width: double.maxFinite,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: vegetableList.length,
-                    itemBuilder: (context, index) {
-                      return SizedBox(
-                        width: 150,
-                        height: 120,
-                        child: Card(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          shadowColor: Colors.deepOrange,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Center(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Color.fromRGBO(248, 239, 235, 1),
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
-                                    width: 120,
-                                    height: 120,
-                                    child: Stack(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(5),
-                                          child: Image.asset(
-                                            width: 100,
-                                            height: 100,
-                                            vegetableList[index]['imagePath']!,
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: 0,
-                                          right: 0,
-                                          child: CircleAvatar(
-                                            radius: 18,
-                                            backgroundColor:
-                                                Colors.grey.shade400,
-                                            child: IconButton(
-                                              onPressed: () {},
-                                              icon: const Icon(
-                                                Icons.favorite,
-                                                color: Colors.white,
-                                                size: 18,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: Text(
-                                    vegetableList[index]['title']!,
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: Row(
-                                    children: [
-                                      const Text('Details  '),
-                                      Text(
-                                        vegetableList[index]['rating']!,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      const Icon(
-                                        Icons.star,
-                                        color: Colors.deepOrange,
-                                        size: 15,
-                                      ),
-                                      Text(
-                                          '(${vegetableList[index]['ratingCount']!})'),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Healthy foods',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'View All',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.deepOrange,
-                          ),
-                        ),
-                        Icon(
-                          Icons.chevron_right,
-                          color: Colors.deepOrange,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  height: 180,
-                  width: double.maxFinite,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: vegetableList.length,
-                    itemBuilder: (context, index) {
-                      return SizedBox(
-                        width: 150,
-                        height: 120,
-                        child: Card(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          shadowColor: Colors.deepOrange,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Center(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Color.fromRGBO(247, 249, 236, 1),
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
-                                    width: 120,
-                                    height: 120,
-                                    child: Stack(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(5),
-                                          child: Image.asset(
-                                            width: 100,
-                                            height: 100,
-                                            healthyFoodsList[index]
-                                                ['imagePath']!,
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: 0,
-                                          right: 0,
-                                          child: CircleAvatar(
-                                            radius: 18,
-                                            backgroundColor: Colors.deepOrange,
-                                            child: IconButton(
-                                              onPressed: () {},
-                                              icon: const Icon(
-                                                Icons.favorite,
-                                                color: Colors.white,
-                                                size: 18,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: Text(
-                                    healthyFoodsList[index]['title']!,
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: Row(
-                                    children: [
-                                      const Text('Details  '),
-                                      Text(
-                                        healthyFoodsList[index]['rating']!,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      const Icon(
-                                        Icons.star,
-                                        color: Colors.deepOrange,
-                                        size: 15,
-                                      ),
-                                      Text(
-                                          '(${healthyFoodsList[index]['ratingCount']!})'),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
