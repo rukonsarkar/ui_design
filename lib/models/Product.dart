@@ -1,14 +1,14 @@
 class Product {
-  String? id;
+  int? id;
   String? name;
-  String? product_code;
+  int? product_code;
   String? category;
   String? thumbnail_img;
   String? slug;
-  String? price;
-  String? sale_price;
+  int? price;
+  int? sale_price;
   String? details;
-  String? status;
+  int? status;
 
   Product(
       this.id,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foody/screens/HomeScreen.dart';
+import 'package:foody/screens/home_screen.dart';
 
 class Foody extends StatelessWidget {
   const Foody({super.key});

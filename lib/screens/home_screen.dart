@@ -1,4 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:foody/models/Product.dart';
+import 'package:foody/widgets/product_item.dart';
+import 'package:http/http.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,78 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int bottomIndex = 0;
 
-  final List<Map<String, String>> vegetables = [
-    {
-      'imagePath': 'assets/images/vegetable1.png',
-      'title': 'Carrot',
-      'description': 'A root vegetable, usually orange in color.',
-      'rating': '4.5',
-      'ratingCount': '150',
-    },
-    {
-      'imagePath': 'assets/images/vegetable2.png',
-      'title': 'Broccoli',
-      'description': 'An edible green plant in the cabbage family.',
-      'rating': '4.7',
-      'ratingCount': '120',
-    },
-    {
-      'imagePath': 'assets/images/vegetable3.png',
-      'title': 'Tomato',
-      'description': 'A red fruit often used as a vegetable in cooking.',
-      'rating': '4.6',
-      'ratingCount': '200',
-    },
-    {
-      'imagePath': 'assets/images/vegetable4.png',
-      'title': 'Potato',
-      'description': 'A starchy plant tuber which is a staple food.',
-      'rating': '4.4',
-      'ratingCount': '180',
-    },
-    {
-      'imagePath': 'assets/images/vegetable5.png',
-      'title': 'Cucumber',
-      'description': 'A long, green-skinned fruit with watery flesh.',
-      'rating': '4.3',
-      'ratingCount': '140',
-    },
-    {
-      'imagePath': 'assets/images/vegetable6.png',
-      'title': 'Spinach',
-      'description': 'A leafy green flowering plant.',
-      'rating': '4.8',
-      'ratingCount': '160',
-    },
-    {
-      'imagePath': 'assets/images/vegetable7.png',
-      'title': 'Bell Pepper',
-      'description': 'A glossy, bell-shaped fruit in various colors.',
-      'rating': '4.5',
-      'ratingCount': '110',
-    },
-    {
-      'imagePath': 'assets/images/vegetable8.png',
-      'title': 'Lettuce',
-      'description': 'A leafy green vegetable often used in salads.',
-      'rating': '4.2',
-      'ratingCount': '130',
-    },
-    {
-      'imagePath': 'assets/images/vegetable9.png',
-      'title': 'Eggplant',
-      'description': 'A purple vegetable with a spongy flesh.',
-      'rating': '4.6',
-      'ratingCount': '90',
-    },
-    {
-      'imagePath': 'assets/images/vegetable10.png',
-      'title': 'Garlic',
-      'description': 'A pungent bulb used in cooking for flavor.',
-      'rating': '4.9',
-      'ratingCount': '200',
-    },
-  ];
+  List<Product> mostRatedProductList = [];
 
   final List<Map<String, String>> vegetableList = [
     {
@@ -210,6 +143,12 @@ class _HomeScreenState extends State<HomeScreen> {
       'ratingCount': '68'
     }
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _getProductList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -374,90 +313,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: double.maxFinite,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: vegetables.length,
+                          itemCount: mostRatedProductList.length,
                           itemBuilder: (context, index) {
-                            return SizedBox(
-                              width: 150,
-                              height: 120,
-                              child: Card(
-                                color: Colors.white,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(70),
-                                    topRight: Radius.circular(70),
-                                    bottomLeft: Radius.circular(15),
-                                    bottomRight: Radius.circular(15),
-                                  ),
-                                ),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Center(
-                                        child: Stack(
-                                          children: [
-                                            Image.asset(
-                                              width: 120,
-                                              height: 120,
-                                              vegetables[index]['imagePath']!,
-                                            ),
-                                            Positioned(
-                                              top: 0,
-                                              right: 0,
-                                              child: CircleAvatar(
-                                                radius: 18,
-                                                backgroundColor:
-                                                Colors.deepOrange,
-                                                child: IconButton(
-                                                  onPressed: () {},
-                                                  icon: const Icon(
-                                                    Icons.favorite,
-                                                    color: Colors.white,
-                                                    size: 18,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8),
-                                        child: Text(
-                                          vegetables[index]['title']!,
-                                          style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8),
-                                        child: Row(
-                                          children: [
-                                            const Text('Details  '),
-                                            Text(
-                                              vegetables[index]['rating']!,
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            const Icon(
-                                              Icons.star,
-                                              color: Colors.deepOrange,
-                                              size: 15,
-                                            ),
-                                            Text(
-                                                '(${vegetables[index]['ratingCount']!})'),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
+                            return ProductItem(mostRatedProductList: mostRatedProductList[index ]);
                           },
                         ),
                       ),
@@ -511,7 +369,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: SingleChildScrollView(
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Center(
                                         child: Container(
@@ -519,19 +377,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                               color: Color.fromRGBO(
                                                   248, 239, 235, 1),
                                               borderRadius:
-                                              BorderRadius.circular(15)),
+                                                  BorderRadius.circular(15)),
                                           width: 120,
                                           height: 120,
                                           child: Stack(
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(5),
+                                                    const EdgeInsets.all(5),
                                                 child: Image.asset(
                                                   width: 100,
                                                   height: 100,
                                                   vegetableList[index]
-                                                  ['imagePath']!,
+                                                      ['imagePath']!,
                                                 ),
                                               ),
                                               Positioned(
@@ -540,7 +398,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 child: CircleAvatar(
                                                   radius: 18,
                                                   backgroundColor:
-                                                  Colors.grey.shade400,
+                                                      Colors.grey.shade400,
                                                   child: IconButton(
                                                     onPressed: () {},
                                                     icon: const Icon(
@@ -644,7 +502,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: SingleChildScrollView(
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Center(
                                         child: Container(
@@ -652,19 +510,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                               color: Color.fromRGBO(
                                                   247, 249, 236, 1),
                                               borderRadius:
-                                              BorderRadius.circular(15)),
+                                                  BorderRadius.circular(15)),
                                           width: 120,
                                           height: 120,
                                           child: Stack(
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(5),
+                                                    const EdgeInsets.all(5),
                                                 child: Image.asset(
                                                   width: 100,
                                                   height: 100,
                                                   healthyFoodsList[index]
-                                                  ['imagePath']!,
+                                                      ['imagePath']!,
                                                 ),
                                               ),
                                               Positioned(
@@ -673,7 +531,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 child: CircleAvatar(
                                                   radius: 18,
                                                   backgroundColor:
-                                                  Colors.deepOrange,
+                                                      Colors.deepOrange,
                                                   child: IconButton(
                                                     onPressed: () {},
                                                     icon: const Icon(
@@ -706,7 +564,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             const Text('Details  '),
                                             Text(
                                               healthyFoodsList[index]
-                                              ['rating']!,
+                                                  ['rating']!,
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.bold),
                                             ),
@@ -786,5 +644,40 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
+  }
+
+  Future<void> _getProductList() async {
+    Uri uri = Uri.parse('https://mohasagor.com.bd/api/reseller/product');
+
+    Map<String, String> headers = {
+      'api-key': 'dFGU2ugUcsVjBTkZ',
+      'secret-key':
+          'e0b0bb5e6c3d2fb8b668694c74af6aa725038a49afc55b1cd67d8ed3c82bc88c',
+    };
+
+    Response response = await get(uri, headers: headers);
+
+    print(response.statusCode);
+
+    if (response.statusCode == 200) {
+      final decodedData = jsonDecode(response.body);
+
+      for (Map<String, dynamic> p in decodedData['products']) {
+        Product product = Product(
+          p['id'],
+          p['name'],
+          p['product_code'],
+          p['category'],
+          p['thumbnail_img'],
+          p['slug'],
+          p['price'],
+          p['sale_price'],
+          p['details'],
+          p['status'],
+        );
+        mostRatedProductList.add(product);
+        setState(() {});
+      }
+    }
   }
 }
